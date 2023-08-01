@@ -1,0 +1,32 @@
+class Solution {
+    public int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        int ans2[]=new int[nums2.length];
+        Stack<Integer> s=new Stack<>();
+        
+        int m = nums2.length-1;  
+        
+        for(int j=m;j>=0;j--){
+            while(!s.isEmpty()&&nums2[j]>nums2[s.peek()]){
+                s.pop();
+            }
+            if(s.isEmpty()==true){
+                ans2[j]=-1;
+            }
+            else{
+                ans2[j]=nums2[s.peek()];
+            }
+            s.push(j);
+        }
+        int k=0;
+        int ans[]=new int[nums1.length];
+        for(int i=0;i<nums1.length;i++){
+            for(int j=0;j<m+1;j++){
+                if(nums1[i]==nums2[j]){
+                    ans[k]=ans2[j];
+                    k++;
+                }
+            }
+        }
+        return ans;
+        }
+    } 
